@@ -1,26 +1,35 @@
-const category = []
-category['regular'] = 0.01
-category['increased'] = 0.05
-category['special'] = 0.3
 
-let purchase = {
-    summPurchase : 0,
-    category: 'regular'
-}
-let result = document.getElementById('cashback')
-let alert = document.getElementById('alert')
+const REGULAR_CATEGORY = 0.01;
+const INCREASED_CATEGORY = 0.05;
+const SPECIAL_CATEGORY = 0.3;
 
-function compute(){
-    purchase.summPurchase = Number(document.getElementById('summa').value)
-    purchase.category = document.getElementById('category').value
-    if (purchase.summPurchase && purchase.category){
-        var cashback = purchase.summPurchase*category[purchase.category]
-        cashback = cashback > 3000 ? 3000:cashback
-        result.innerHTML = cashback
-    } else{
-        alert.innerHTML = "Сначало заполните поле сумма покупки"
-        setTimeout(()=>{
-            alert.innerHTML = ''
-        }, 5000)
-    }
+const purchases = [
+    {
+        amount: 10000,
+        category: REGULAR_CATEGORY
+    },
+    {
+        amount: 10000,
+        category: INCREASED_CATEGORY,  
+    },
+    {
+        amount: 1000,
+        category: REGULAR_CATEGORY,
+    },
+    {
+        amount: 1000,
+        category: SPECIAL_CATEGORY,
+    },
+    {
+        amount: 28,
+        category: SPECIAL_CATEGORY,
+    },
+];
+let cashback = 0;
+
+for(let purchase of purchases){
+    cashback += purchase.amount*purchase.category;
 }
+cashback = cashback > 3000 ? 3000:cashback;
+
+console.log(cashback);
