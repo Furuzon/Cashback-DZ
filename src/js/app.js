@@ -2,6 +2,10 @@
 const REGULAR_CATEGORY = 'regular';
 const INCREASED_CATEGORY = 'increased';
 const SPECIAL_CATEGORY = 'special';
+const REGULAR_COEFFICIENT = 0.01;
+const INCREASED_COEFFICIENT = 0.05;
+const SPECIAL_COEFFICIENT = 0.3;
+const casbackLimit = 3000;
 
 const purchases = [
     {
@@ -17,22 +21,22 @@ const purchases = [
         category: REGULAR_CATEGORY,
     },
     {
-        amount: 10000,
+        amount: 1000,
         category: SPECIAL_CATEGORY,
     },
 ];
 let cashback = 0;
 
 for(let purchase of purchases){
-    if(purchase.category === 'regular'){
-        cashback += purchase.amount*0.01;
-    }else if(purchase.category === 'increased'){
-        cashback += purchase.amount*0.05;
-    }else if(purchase.category === 'special'){
-        cashback += purchase.amount*0.3;
+    if(purchase.category === REGULAR_CATEGORY){
+        cashback += purchase.amount*REGULAR_COEFFICIENT;
+    }else if(purchase.category === INCREASED_CATEGORY){
+        cashback += purchase.amount*INCREASED_COEFFICIENT;
+    }else if(purchase.category === SPECIAL_CATEGORY){
+        cashback += purchase.amount*SPECIAL_COEFFICIENT;
     }
     
 }
-cashback = cashback > 3000 ? 3000:cashback;
+cashback = cashback > casbackLimit ? casbackLimit:cashback;
 
 console.log(cashback)
